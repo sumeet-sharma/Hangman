@@ -37,7 +37,7 @@ function startGame(){
     console.log(computerGuess);
 
     // split the word into individual letters
-    lettersInComputerGuess = computerGuess.split(' ');
+    lettersInComputerGuess = computerGuess.split('');
     
     // calculating the number of blanks
     numBlanks = lettersInComputerGuess.length;
@@ -49,7 +49,7 @@ function startGame(){
 
     document.getElementById('guesses-left').innerHTML = numGuesses;
     document.getElementById('word-blanks').innerHTML = blanksAndSuccesses.join(' ');
-    document.getElementById('wrong-guesses').innerHTML = wrongGuesses.join(' ');f
+    document.getElementById('wrong-guesses').innerHTML = wrongGuesses.join(' ');
 }
 
 // this function compares the letters typed by the user and match it with the computerGuess
@@ -103,6 +103,68 @@ function checkLetters(letter){
 // after each guess is made.
 function roundComplete(){
 
+    // First, log an initial status update in the console
+    // telling us how many wins, losses, and guesses are left.
+    console.log("Wins: " + wins + " | Losses: " + losses + " | Guesses left: " + numGuesses);
+
+    // HTML UPDATES
+    // ============
+
+    // update the HTML to reflect the new number of guesses
+    document.getElementById('guesses-left').innerHTML = numGuesses;
+    document.getElementById('word-blanks').innerHTML = blanksAndSuccesses.join(' ');
+    document.getElementById('wrong-guesses').innerHTML = wrongGuesses.join(' ');
     
+    // if our hangman string equals the solution
+    // (meaning that we guessed all the letters to match the solution)...
+    if(lettersInComputerGuess.toString() === blanksAndSuccesses.toString()){
+
+        // add to the win counter
+        wins++;
+
+        // give the user an alert
+        alert('YOU WIN!!')
+
+        // update the win counter in HTML
+        document.getElementById('wins').innerHTML = wins;
+
+        // Restart the game
+        startGame();
+    }
+
+    // if we have run out of guesses
+    else if (numGuesses === 0){
+
+        // add to the loss counter
+        losses++;
+
+        // give the user an alert
+        alert('YOU LOSE!!');
+
+        // update the loss counter in HTML
+        document.getElementById('losses').innerHTML = losses;
+
+        // Restart the game
+        startGame();
+    }
 }
+
+// MAIN PROCESS (THIS IS THE CODE THAT CONTROLS WHAT IS ACTUALLY RUN)
+// ==================================================================
+
+// Starts the Game by running the startGame() function
+startGame();
+
+// Then iniates the function for capturing key clicks
+document.onkeyup = function(event){
+    
+    // converts all the key clicks into lowercase letters
+    lettersGuessed = String.fromCharCode(event.which).toLowerCase();
+    
+    // runs the code to check for correct guesses
+    checkLetters(lettersGuessed);
+
+    // runs the code that ends each round
+    roundComplete();
+};
 

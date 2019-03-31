@@ -1,0 +1,38 @@
+body{
+    /* background-image: url(../images/Dark-Batman.jpg) */
+    color: white;
+    background-color: brown;
+}   
+
+img {
+    height: 250px;
+}
+
+
+.logo{
+    width: 20%;
+    margin: auto;
+    margin-top: 3%;
+}
+
+.bd-example{
+    width: 40%;
+    float: right;
+    margin-right: 450px;
+}
+
+.main-content{
+    width: 20%;
+    margin: auto;
+    font-size: 25px;
+    margin-top: 5%;
+}
+
+.list-group{
+    width: 20%;
+    color: black;
+    margin: auto;
+    margin-top: 10px;
+    background-color: brown;
+}
+
